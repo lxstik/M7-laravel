@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware([IsUserAuth::class])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'getUser']);
-    Route::gost('personajes', [PersonajesController::class, 'addPersonaje'])
+    Route::post('personajes', [PersonajesController::class, 'addPersonaje']);
 });
 
 
