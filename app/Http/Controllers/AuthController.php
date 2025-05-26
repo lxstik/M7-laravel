@@ -9,11 +9,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 
-Route::middleware([IsUserAuth::class])->group(function () {
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('me', [AuthController::class, 'getUser']);
-    Route::post('personajes', [PersonajesController::class, 'addPersonaje']);
-});
+
 
 
 class AuthController extends Controller
