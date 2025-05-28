@@ -8,7 +8,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Middleware\IsUserAuth;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\Api\PersonajesController;
-
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CardController;
 
 
 Route::get('/cards/category/{categoryId}', [CardController::class, 'getByCategory']);

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Card;
 use Illuminate\Http\Request;
+use App\Models\Card; // Importa el modelo Card
+use Illuminate\Support\Facades\Auth; // Importa Auth
+use App\Http\Controllers\Controller; // Importa el controlador base
+
 
 class CardController extends Controller
 {
