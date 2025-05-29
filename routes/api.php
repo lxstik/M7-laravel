@@ -12,7 +12,7 @@ use App\Http\Controllers\MascotaController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-    Route::get('pets', [MascotaController::class, 'misMascotas']);
+
 
 
 
@@ -21,6 +21,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware([IsUserAuth::class])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('pets', [MascotaController::class, 'misMascotas']);
     Route::post('pets', [MascotaController::class, 'insertarMisMascotas']);
     Route::put('pets/{id}', [MascotaController::class, 'editarMisMascotas']);
     Route::get('pets', [MascotaController::class, 'misMascotas']);
