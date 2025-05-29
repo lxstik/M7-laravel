@@ -11,6 +11,11 @@ Para acceder a los endpoints protegidos es necesario autenticarse. Tras hacer lo
 
 Authorization: Bearer {tu_token}
 
+JWT
+---
+JWT (Jason Web Token), es el token que utilizaremos para poder cumplir ciertas cosas, teniendo que verificar que tu eres el usuario, por ejemplo log out o sacar la informacion sobre los usuarios(admin)
+
+
 Endpoints principales
 ---------------------
 
