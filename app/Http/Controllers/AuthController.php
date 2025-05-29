@@ -90,7 +90,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function usuarioConcreto($id){
+    public function usuarioInfo($id){
 
         $usuario = User::find($id);
 
@@ -100,7 +100,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function usuarioConcretoEditar(Request $request, $id){
+    public function usuarioEditar(Request $request, $id){
 
         $usuario = User::find($id);
 
@@ -125,7 +125,7 @@ class AuthController extends Controller
 
     }
 
-    public function usuarioConcretoBorrar($id){
+    public function usuarioBorrar($id){
 
         $usuario = User::find($id);
 

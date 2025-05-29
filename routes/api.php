@@ -28,9 +28,9 @@ Route::middleware([IsUserAuth::class])->group(function () {
 });
 
 Route::middleware([IsUserAdmin::class])->group(function () {
+    Route::get('users/{id}', [AuthController::class, 'usuarioInfo']);
+    Route::put('users/{id}', [AuthController::class, 'usuarioEditar']);
     Route::get('users/', [AuthController::class, 'usuarios']);
-    Route::get('users/{id}/pets', [MascotaController::class, 'mascotasOtros']);
-    Route::get('users/{id}', [AuthController::class, 'usuarioConcreto']);
-    Route::delete('users/{id}', [AuthController::class, 'usuarioConcretoBorrar']);
-    Route::put('users/{id}', [AuthController::class, 'usuarioConcretoEditar']);
+    Route::delete('users/{id}', [AuthController::class, 'usuarioBorrar']);
+    Route::get('users/{id}/pets', [MascotaController::class, 'mascotasDeOtros']);
 });
