@@ -12,6 +12,8 @@ use App\Http\Controllers\MascotaController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+    Route::get('pets', [MascotaController::class, 'misMascotas']);
+
 
 
 
