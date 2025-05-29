@@ -1,5 +1,5 @@
 API de Gestión de Mascotas
-==========================
+--------------------------
 
 Información general
 -------------------
@@ -7,7 +7,7 @@ Esta API permite gestionar usuarios y mascotas. Los usuarios pueden registrar y 
 
 Autenticación
 -------------
-Para acceder a los endpoints protegidos es necesario autenticarse. Tras hacer login, debes incluir el token en la cabecera de tus peticiones:
+Para acceder a los endpoints protegidos es necesario autenticarse. Tras hacer login, debes incluir el token en la cabecera de peticiones:
 
 Authorization: Bearer {tu_token}
 
@@ -117,7 +117,7 @@ Notas
 
 
 Credenciales de Pruebas
------
+-----------------------
 
 admin: 
  - "email": "egorrfal32@gmail.com",
