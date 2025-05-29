@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Contracts\Providers\JWT;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    //
-    public function register(Request $request)
-    {
+
+    public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:100|in:admin,user',
@@ -29,15 +28,16 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $request->get('name'),
-            'role' => $request->get('role'),
             'email' => $request->get('email'),
+            'role' => $request->get('role'),
             'password' => bcrypt($request->get('password')),
         ]);
 
         return response()->json([
-            'message' => 'User registered successfully',
-            'user' => $user,
+            'mensaje' => 'Usuario resgistrado',
+            'user' => $user
         ], 201);
+
     }
 
     public function login(Request $request)
@@ -56,13 +56,13 @@ class AuthController extends Controller
         try {
             if (!$token = JWTAuth::attempt($credenciales)) {
                 return response()->json([
-                    'error' => 'Unauthorized'
+                    'error' => 'No estas autorizado'
                 ], 401);
             }
         } catch (JWTException $e) {
             return response()->json([
-                'error' => 'Could not create token',
-                'mesage' => $e->getMessage(),
+                'error' => 'No se ha podido crear el token',
+                'mensaje' => $e->getMessage(),
             ], 500);
         }
         return response()->json([
@@ -72,21 +72,70 @@ class AuthController extends Controller
 
     }
 
-    public function getUser()
-    {
-        $user = Auth::user();
-        return response()->json([
-            'user' => $user,
-        ], 200);
-
-    }
-
     public function logout()
     {
         Auth::logout();
         return response()->json([
-            'message' => 'User logged out successfully',
+            'mensaje' => 'Sesion cerrada',
         ], 200);
+    }
+
+    public function usuarios(){
+
+        $usuarios = User::all();
+
+        return response()->json([
+            'mensaje' => 'Mascotas',
+            'usuarios' => $usuarios
+        ], 200);
+    }
+
+    public function usuarioConcreto($id){
+
+        $usuario = User::find($id);
+
+        return response()->json([
+            'mensaje' => 'Usuario encontrado',
+            'usuario' => $usuario
+        ], 200);
+    }
+
+    public function usuarioConcretoEditar(Request $request, $id){
+
+        $usuario = User::find($id);
+
+         $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'role' => 'required|string|max:100|in:admin,user',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+
+
+        if($validator->fails()){
+             return response()->json($validator->errors(), 422);
+        }
+
+        if(!$usuario){
+            return response()->json(['mensaje' => 'user no encontrado'], 404);
+        }
+
+        $usuario->update($request->all());
+        return response()->json(['usuario' => $usuario], 200);
+
+    }
+
+    public function usuarioConcretoBorrar($id){
+
+        $usuario = User::find($id);
+
+        if(!$usuario){
+            return response()->json(['mensaje' => 'user no encontrado'], 404);
+        }
+
+        $usuario->delete();
+        return response()->json(['mensaje' => 'user borrado'], 200);
+
     }
 
 }
