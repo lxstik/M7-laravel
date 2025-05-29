@@ -15,7 +15,8 @@ class MascotaController extends Controller
         return "HOla";
     }
 
-    public function mascotasMias()
+    //para obtener las mascotas de un usuario autenticado
+    public function misMascotas()
      {
         $userId = Auth::id();
         $mascotas = Mascota::where('user_id', $userId)->get();
@@ -26,18 +27,17 @@ class MascotaController extends Controller
         ], 200);
     }
 
-    public function mascotasMiasInsertar(Request $request)
+    //para insertar una mascota de un usuario autenticado
+    public function insertarMisMascotas(Request $request)
     {
         $validator  = Validator::make($request->all(),[
             'nombre' => 'required|string|max:100',
             'imagen' => 'required|url',
             'tipo' => 'required|string|max:100',
         ]);
-
         if($validator->fails()){
              return response()->json($validator->errors(), 422);
         }
-
         $mascota = Mascota::create([
             'user_id' => Auth::id(),
             'nombre' => $request->nombre,
@@ -51,7 +51,8 @@ class MascotaController extends Controller
         ], 201);
     }
 
-    public function mascotasMiasEditar(Request $request, $id)
+    //para editar una mascota de un usuario autenticado
+    public function editarMisMascotas(Request $request, $id)
     {
 
         $mascota = Mascota::find($id);
@@ -81,7 +82,8 @@ class MascotaController extends Controller
 
     }
 
-    public function mascotasMiasCambiar(Request $request, $id)
+    //para editar una mascota de un usuario autenticado
+    public function cambiaMisMascotas(Request $request, $id)
     {
          $mascota = Mascota::find($id);
 
@@ -110,7 +112,7 @@ class MascotaController extends Controller
 
     }
 
-    public function mascotasMiasBorrar(Request $request, $id)
+    public function eliminarMisMascotas(Request $request, $id)
     {
         $mascota = Mascota::find($id);
         if (!$mascota) {
